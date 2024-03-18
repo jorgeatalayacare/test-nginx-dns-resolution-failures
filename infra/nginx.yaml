@@ -15,11 +15,13 @@ spec:
       containers:
         - name: nginx
           # Need to replace TAG with the actual tag of the custom-nginx image
-          image: custom-nginx:TAG
+          image: custom-nginx:$TAG
           ports:
             - containerPort: 80
         - name: tcpdump
-          image: dockersec/tcpdump
+          image: corfr/tcpdump  # This is an example image that contains tcpdump
+          command: ["/usr/sbin/tcpdump"]
+          args: ["-i", "any", "udp", "port", "53"]
           securityContext:
             capabilities:
               add:

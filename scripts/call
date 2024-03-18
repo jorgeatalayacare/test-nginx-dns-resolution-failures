@@ -3,7 +3,7 @@
 counter=0
 while true
 do
-  sleep 0.0001 
+  sleep  1.0001
   printf "**********\n"
   date
   curl -H "Host: test${counter}.hello-test.internal" "http://127.0.0.1:8080"
