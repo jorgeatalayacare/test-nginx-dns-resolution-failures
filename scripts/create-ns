@@ -1,0 +1,15 @@
+#!/bin/bash
+
+NS=(
+  "ingress-nginx"
+)
+
+for ns in ${NS[@]}; do
+  NAMESPACE=$(kubectl get ns | grep $ns | awk '{print $1}')
+  if [ -z  $NAMESPACE ] 
+  then
+      kubectl create ns $ns
+  else
+      echo "Namespace $ns already exists"
+  fi
+done

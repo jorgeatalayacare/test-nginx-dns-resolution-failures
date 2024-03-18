@@ -1,0 +1,8 @@
+#!/bin/bash
+
+set -eu 
+
+CONTEXT=$1
+PORT=${2:-8080}
+
+kubectl --context $CONTEXT -n ingress-nginx port-forward svc/ingress-nginx-controller $PORT:80

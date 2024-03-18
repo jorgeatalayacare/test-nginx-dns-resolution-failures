@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: reverse-proxy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: reverse-proxy
+  template:
+    metadata:
+      labels:
+        app: reverse-proxy
+    spec:
+      containers:
+        - name: nginx
+          # Need to replace TAG with the actual tag of the custom-nginx image
+          image: custom-nginx:TAG
+          ports:
+            - containerPort: 80
+        - name: tcpdump
+          image: dockersec/tcpdump
+          securityContext:
+            capabilities:
+              add:
+                - NET_ADMIN
+                - NET_RAW
